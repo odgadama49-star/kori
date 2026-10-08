@@ -1,0 +1,7 @@
+{
+  "name": "kori-budget",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Kori — suivi de budget pour le quotidien en UEMOA",
+  "engines": { "node": ">=20" }
+}
