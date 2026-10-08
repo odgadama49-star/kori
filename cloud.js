@@ -60,7 +60,12 @@
   async function update(table, query, values) {
     return request(`${table}?${query}`, { method: "PATCH", headers: { Prefer: "return=representation" }, body: JSON.stringify(values) });
   }
-  async function list(table, query = "select=*") { return request(`${table}?${query}`); }
+  async function list(table, query = "select=*") {
+    // Call sites may pass either a table name plus query options, or a full
+    // PostgREST path that already contains its query string.
+    const path = table.includes("?") ? table : `${table}?${query}`;
+    return request(path);
+  }
   async function remove(table, query) { return request(`${table}?${query}`, { method: "DELETE" }); }
 
   window.KoriCloud = {
@@ -77,3 +82,4 @@
     signOut: async () => { const current = getSession(); if (current?.access_token) await fetch(`${base}/auth/v1/logout`, { method: "POST", headers: { apikey: anon, Authorization: `Bearer ${current.access_token}` } }).catch(() => {}); saveSession(null); }
   };
 })();
+
