@@ -72,7 +72,7 @@
       if (!response.ok) return null;
       return response.json();
     },
-    signUp: (email, password, displayName) => auth("signup", { email, password, data: { display_name: displayName } }),
+    signUp: (email, password, displayName) => auth(`signup?redirect_to=${encodeURIComponent(config.appUrl || location.origin)}`, { email, password, data: { display_name: displayName } }),
     signIn: (email, password) => auth("token?grant_type=password", { email, password }),
     signOut: async () => { const current = getSession(); if (current?.access_token) await fetch(`${base}/auth/v1/logout`, { method: "POST", headers: { apikey: anon, Authorization: `Bearer ${current.access_token}` } }).catch(() => {}); saveSession(null); }
   };
