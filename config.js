@@ -1,9 +1,8 @@
-// Remplir avec l'URL du projet Supabase et sa clé publique publishable.
-// Ne jamais mettre une clé service_role ici.
+// Public Supabase settings for Kori. Never place a service_role key in this file.
 window.KORI_CONFIG = {
-  supabaseUrl: "",
-  supabasePublishableKey: "",
-  appUrl: "",
+  supabaseUrl: "https://mqjhdxxxmoykckhofphw.supabase.co",
+  supabasePublishableKey: "sb_publishable_kcu7fYahpfzfxhmH0WSjUg_sdx7raAR",
+  appUrl: "https://kori-eta.vercel.app",
   plusPriceXof: "",
   adsenseClient: "",
   adsenseSlot: ""
