@@ -17,7 +17,7 @@ async function admin(path, options = {}) {
   if (!SERVICE) throw new Error("Supabase server key is not configured.");
   const response = await fetch(`${BASE}/rest/v1/${path}`, {
     ...options,
-    headers: { apikey: SERVICE, Authorization: `Bearer ${SERVICE}`, "Content-Type": "application/json", ...(options.headers || {}) }
+    headers: { apikey: SERVICE, ...(SERVICE.startsWith("sb_secret_") ? {} : { Authorization: `Bearer ${SERVICE}` }), "Content-Type": "application/json", ...(options.headers || {}) }
   });
   const data = await response.json().catch(() => null);
   if (!response.ok) throw new Error(data?.message || "Database request failed.");
